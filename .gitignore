@@ -1,3 +1,4 @@
 node_modules
 tsconfig.json
-tmp/app.db
+db/app.db
+src/server.ts
