@@ -4,11 +4,18 @@ import { knex } from './database'
 
 const app = fastify()
 
+// Rota que consulta transactions com amount = 1000
 app.get('/hello', async () => {
   const transactions = await knex('transactions')
     .where('amount', 1000)
     .select('*')
   return transactions
+})
+
+// Rota para listar as tabelas existentes no banco (útil para debug)
+app.get('/tables', async () => {
+  const tables = await knex('sqlite_schema').select('*')
+  return tables
 })
 
 app
