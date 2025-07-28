@@ -1,18 +1,14 @@
 import fastify from 'fastify'
-import crypto from 'node:crypto'
+import dotenv from 'dotenv'
 import { knex } from './database'
+import { transactionsRoutes } from './routes/transactions'
+
+dotenv.config()
 
 const app = fastify()
 
-// Rota que consulta transactions com amount = 1000
-app.get('/hello', async () => {
-  const transactions = await knex('transactions')
-    .where('amount', 1000)
-    .select('*')
-  return transactions
-})
+app.register(transactionsRoutes)
 
-// Rota para listar as tabelas existentes no banco (útil para debug)
 app.get('/tables', async () => {
   const tables = await knex('sqlite_schema').select('*')
   return tables
@@ -20,8 +16,8 @@ app.get('/tables', async () => {
 
 app
   .listen({
-    port: 3333,
+    port: Number(process.env.PORT) || 3333,
   })
   .then(() => {
-    console.log('HTTP Server Running!')
+    console.log(`HTTP Server Running on port ${process.env.PORT || 3333}`)
   })
