@@ -7,7 +7,9 @@ dotenv.config()
 
 const app = fastify()
 
-app.register(transactionsRoutes)
+app.register(transactionsRoutes, {
+  prefix: '/transactions',
+})
 
 app.get('/tables', async () => {
   const tables = await knex('sqlite_schema').select('*')
