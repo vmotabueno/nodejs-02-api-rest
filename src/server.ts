@@ -2,11 +2,13 @@ import fastify from 'fastify'
 import dotenv from 'dotenv'
 import { knex } from './database'
 import { transactionsRoutes } from './routes/transactions'
+import cookie from '@fastify/cookie'
 
 dotenv.config()
 
 const app = fastify()
 
+app.register(cookie)
 app.register(transactionsRoutes, {
   prefix: '/transactions',
 })
