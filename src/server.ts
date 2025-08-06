@@ -1,32 +1,10 @@
-import fastify from 'fastify'
-import dotenv from 'dotenv'
-import { knex } from './database'
-import { transactionsRoutes } from './routes/transactions'
-import cookie from '@fastify/cookie'
-
-dotenv.config()
-
-const app = fastify()
-
-app.register(cookie)
-
-app.addHook('preHandler', async (request, reply) => {
-  console.log(`${request.method} ${request.url}`)
-})
-
-app.register(transactionsRoutes, {
-  prefix: '/transactions',
-})
-
-app.get('/tables', async () => {
-  const tables = await knex('sqlite_schema').select('*')
-  return tables
-})
+import { app } from './app'
+import { env } from './env'
 
 app
   .listen({
-    port: Number(process.env.PORT) || 3333,
+    port: env.PORT,
   })
   .then(() => {
-    console.log(`HTTP Server Running on port ${process.env.PORT || 3333}`)
+    console.log(`HTTP Server Running on port ${env.PORT}`)
   })
