@@ -6,7 +6,9 @@
     "dev": "tsx watch src/server.ts",
     "knex": "tsx ./node_modules/knex/bin/cli.js",
     "lint": "eslint src --ext .ts --fix",
-    "test": "vitest"
+    "build": "tsup src --out-dir build",
+    "test": "vitest",
+    "format": "prettier --write \"src/*/.ts\""
   },
   "keywords": [],
   "author": "",
@@ -14,13 +16,20 @@
   "description": "",
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.2.2",
-    "@types/node": "^24.1.0",
+    "@types/jest": "^30.0.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.2.0",
     "@types/supertest": "^6.0.3",
     "eslint": "^8.57.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2",
+    "sqlite3": "^5.1.4",
     "supertest": "^7.1.4",
     "ts-node": "^10.9.2",
+    "tsup": "^6.5.0",
     "tsx": "^4.20.3",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
   "dependencies": {
